@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     environment {
         git_branch = 'main'
         git_url = 'git@github.com:maruthibg1998/demo2.git'
@@ -16,19 +16,25 @@ pipeline {
 
         stage('Compile') {
             steps {
-                sh 'mvn compile'
+                dir('maruthi') {
+                    sh 'mvn compile'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                dir('maruthi') {
+                    sh 'mvn test'
+                }
             }
         }
 
-        stage('Build Project') {
+        stage('Build') {
             steps {
-                sh 'mvn clean install'
+                dir('maruthi') {
+                    sh 'mvn clean install'
+                }
             }
         }
     }
